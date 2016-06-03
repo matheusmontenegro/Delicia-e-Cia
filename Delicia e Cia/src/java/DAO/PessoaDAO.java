@@ -25,7 +25,6 @@ public class PessoaDAO {
         rs.last();
         row = rs.getRow();
         stmt.close();
-        System.out.println(row);
         if(row == 0) {
             return false;
         }else{
@@ -46,7 +45,7 @@ public class PessoaDAO {
     public boolean cpfCheck(String cpf) throws SQLException{
         String sqlCPF = "select * from pessoa where cpf = ?";
         int rowCpf = 0;
-        
+
         PreparedStatement stmtCpf = connection.prepareStatement(sqlCPF, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY); 
         stmtCpf.setString(1, cpf);
         stmtCpf.execute();

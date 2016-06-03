@@ -34,11 +34,11 @@ public class ServletLogin extends HttpServlet {
                     out.print("<script>alert('Bem-vindo "+nome+"!');</script>");
                     out.print("<script>location.replace('admin.jsp');</script>");   
                     session.setAttribute("admin",nome); 
-                    session.setMaxInactiveInterval(120);
+                    //session.setMaxInactiveInterval(120);
                 }else{
                     session.setAttribute("nome",nome); 
                     session.setAttribute("admin",null); 
-                    session.setMaxInactiveInterval(120);
+                    //session.setMaxInactiveInterval(120);
                     out.print("<script>alert('Bem-vindo "+nome+"!');</script>");
                     out.print("<script>location.replace('index.jsp');</script>");   
                 }

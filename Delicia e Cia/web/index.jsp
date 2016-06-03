@@ -3,7 +3,7 @@
 <html>
 <head>
 <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
-<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/materialize.min.js"></script>
 <script>
 	$(document).ready(function(){
@@ -55,7 +55,7 @@
   <div class="nav-wrapper container grey darken-2">
     <a href="#!" class="brand-logo"><img src="img/logo.png" style="width:70px;"></a>
 <!-- Botão do Menu Mobile -->
-    <a href="#" data-activates="mobile-demo" class="button-collapse"><img src="img/menuButton.png" style="width:30px; margin-top: 15px;"></a>
+    <a href="#" data-activates="mobile" class="button-collapse"><img src="img/menuButton.png" style="width:30px; margin-top: 15px;"></a>
 <!-- Opções da Navbar -->
     <ul class="right hide-on-med-and-down">
       <li class="waves-effect waves-yellow"><a href="index.jsp">Home</a></li>
@@ -64,17 +64,17 @@
       <li id="loginButton"><a href="#loginModal" class="waves-effect waves-yellow btn modal-trigger white black-text">Login</a></li>
       <li id="cadastroButton"><a href="#cadastroModal" class="waves-effect waves-light btn-large modal-trigger yellow darken-1 ">Cadastre-se</a></li>
       <li id="minhaContaButton" style="display:none;"><a href="#" class="waves-effect waves-light btn-large yellow darken-1">Minha Página</a></li>
-      <li id="logoutButton" style="display:none;"><a href="#" class="white-text">Logout</a></li>
+      <li id="logoutButton" style="display:none;"><a href="ServletLogout" class="white-text">Logout</a></li>
     </ul>
 <!-- Opções do Menu Mobile -->
-    <ul class="side-nav" id="mobile-demo">
+    <ul class="side-nav" id="mobile">
       <li><a href="index.jsp">Home</a></li>
       <li><a href="#">Contato</a></li>
       <li><a href="#!" class="dropdown-button" data-activates="dropdown2">Produtos</a></li>
       <li id="loginButton"><a href="#loginModal" class="waves-effect waves-yellow btn modal-trigger white black-text">Login</a></li>
       <li id="cadastroButton"><a href="#cadastroModal" class="waves-effect waves-light btn-large modal-trigger yellow darken-1 ">Cadastre-se</a></li>
       <li id="minhaContaButtonMobile" style="display:none;"><a href="#" class="waves-effect waves-light btn-large yellow darken-1">Minha Página</a></li>
-      <li id="logoutButtonMobile" style="display:none;"><a href="#">Logout</a></li>
+      <li id="logoutButtonMobile" style="display:none;"><a href="ServletLogout">Logout</a></li>
     </ul>
   </div>
 </nav>
