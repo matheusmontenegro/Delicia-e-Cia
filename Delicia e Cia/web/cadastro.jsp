@@ -63,13 +63,6 @@
                 </select>
                 <label>Tipo do Produto</label>
               </div>
-                <!-- <div class="col s5 offset-s1">
-                    <select class="browser-default select-wrapper" id="tipoProduto" name="tipoProduto" required="required">
-                      <option selected="selected" disabled="disabled">Escolha um tipo...</option>
-                      <option value="doce">Doce</option>
-                      <option value="salgado">Salgado</option>
-                    </select>
-                </div> -->
                 <div class="input-field col s5">
                     <input id="quantidade" placeholder="Ex: 500" type="number" name="quantidade" required="required" />
                     <label for="quantidade">Quantidade</label>

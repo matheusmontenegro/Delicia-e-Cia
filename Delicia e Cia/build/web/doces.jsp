@@ -1,3 +1,8 @@
+
+<%@page import="Bean.Produto"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@page import="DAO.ProdutoDAO"%>
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -62,7 +67,7 @@
     <div class="modal-content">
       <h4>Login</h4>
       <div class="row">
-    <form class="col s12" method="post" action="~~~~EDITHERE~~~~">
+    <form class="col s12" method="post" action="ServletLogin">
       <div class="row">
 	      <div class="input-field col s12">
 	      		<input id="user" name="user" type="text">
@@ -91,7 +96,7 @@
     <div class="modal-content">
       <h4>Cadastro</h4>
       <div class="row">
-    <form class="col s12" method="post" action="~~~~EDITHERE~~~~">
+    <form class="col s12" method="post" action="ServletCadastro">
       <div class="row">
         <div class="input-field col s12">
           <input placeholder="Ex: José da Silva Santos" id="name" type="text" class="validate">
@@ -164,56 +169,29 @@
  <!-- Linha -->
       <div class="row">
       	<h4>Doces...</h4>
-        <div class="col s12 m4 hoverable">
-          <div class="icon-block">
-	  		  <h2 class="center light-blue-text">
-	 			<img class="circle" src="http://www.saudedica.com.br/wp-content/uploads/2014/03/batata-doce.jpg" style="width:150px; height:167px;" ">
-	 		  </h2>
-	          <h5 class="center">Batata Doce!</h5>
-	          <p class="light center">Não deixa de ser doce. O mais saudável possível. É natural!</p>
-	          <h4><p class="orange-text center">R$ 2,00/Kg.</p></h4>
-	          <div class="center">
-		          <button class="btn waves-effect waves-light white-text yellow darken-2">
-		          	Comprar
-		          </button>
-	          </div>
-	          <br>
-          </div>
-        </div>
-
-        <div class="col s12 m4 hoverable">
-          <div class="icon-block">
-	  		  <h2 class="center light-blue-text">
-	 			<img class="circle" src="http://www.bolsademulher.com/sites/www.bolsademulher.com/files/receita/melhores-receitas-de-doce-5.jpg" style="width:150px;">
-	 		  </h2>
-	          <h5 class="center">Cupcake Top!</h5>
-	          <p class="light center">Delicioso Cupcake com Chantilly Azul. Engorda pouquinho. </p>
-	          <h4><p class="orange-text center">R$ 2,00/Cada</p></h4>
-	          <div class="center">
-		          <button class="btn waves-effect waves-light white-text yellow darken-2">
-		          	Comprar
-		          </button>
-	          </div>
-	          <br>
-          </div>
-        </div>
-
-        <div class="col s12 m4 hoverable">
-          <div class="icon-block">
-	  		  <h2 class="center light-blue-text">
-	 			<img class="circle" src="http://www.bolsademulher.com/sites/www.bolsademulher.com/files/receita/melhores-receitas-de-doce-5.jpg" style="width:150px;">
-	 		  </h2>
-	          <h5 class="center">Cupcake Top!</h5>
-	          <p class="light center">Delicioso Cupcake com Chantilly Azul. Engorda pouquinho. </p>
-	          <h4><p class="orange-text center">R$ 2,00/Cada</p></h4>
-	          <div class="center">
-		          <button class="btn waves-effect waves-light white-text yellow darken-2">
-		          	Comprar
-		          </button>
-	          </div>
-	          <br>
-          </div>
-        </div>
+        <%  
+            ProdutoDAO produtoDao = new ProdutoDAO();
+            ArrayList<Produto> produtos = produtoDao.listarTodos("doce"); 
+            pageContext.setAttribute("produtos", produtos);
+        %>
+        <c:forEach var="produto" items="${produtos}">
+            <div class="col s12 m4 hoverable">
+              <div class="icon-block">
+                              <h2 class="center light-blue-text">
+                                  <img class="circle" src="produtoImg/<c:out value='${produto.getFoto()}'/>" style="width:150px; height:150px;">
+                              </h2>
+                      <h5 class="center"><c:out value='${produto.getNomeProduto()}'/></h5>
+                      <p class="light center"><c:out value='${produto.getDescricao()}'/></p>
+                      <h4><p class="orange-text center">R$ <c:out value='${produto.getPrecoUnidade()}'/></p></h4>
+                      <div class="center">
+                              <button class="btn waves-effect waves-light white-text yellow darken-2">
+                                    Comprar
+                              </button>
+                      </div>
+                      <br>
+              </div>
+            </div>
+        </c:forEach>
 
       </div>
  <!-- Fim da Linha -->

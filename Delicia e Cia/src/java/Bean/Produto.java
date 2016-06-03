@@ -2,6 +2,7 @@
 package Bean;
 
 public class Produto {
+    private int idProduto;
     private String tipo;
     private String nomeProduto;
     private int quantidade;
@@ -106,6 +107,20 @@ public class Produto {
      */
     public void setFoto(String foto) {
         this.foto = foto;
+    }
+
+    /**
+     * @return the idProduto
+     */
+    public int getIdProduto() {
+        return idProduto;
+    }
+
+    /**
+     * @param idProduto the idProduto to set
+     */
+    public void setIdProduto(int idProduto) {
+        this.idProduto = idProduto;
     }
     
 }

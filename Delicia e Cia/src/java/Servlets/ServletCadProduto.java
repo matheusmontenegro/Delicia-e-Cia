@@ -21,7 +21,7 @@ public class ServletCadProduto extends HttpServlet {
             throws ServletException, IOException {
         PrintWriter out = response.getWriter();
         String nomeProduto = request.getParameter("nomeProduto");
-        String tipo = request.getParameter("tipoProduto");
+        String tipo = request.getParameter("tipo");
         int quantidade = Integer.parseInt(request.getParameter("quantidade"));
         String descricao = request.getParameter("descricao");
         String precoUnidade = request.getParameter("precoUnidade");
