@@ -14,4 +14,5 @@ interface PessoaDAOint {
     public boolean login(String login, String password) throws SQLException; //Validação do login
     public String getUserName(String login) throws SQLException; //Requisição do nome do Usuário após logado
     public boolean isAdmin(String login) throws SQLException; //verificação de permissão do usuário logado
+    public Pessoa getPessoa(String login) throws SQLException;//Busca dos dados do usuário
 }   

@@ -3,7 +3,6 @@ package Servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.lang.ProcessBuilder.Redirect;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,9 +21,9 @@ public class ServletLogout extends HttpServlet {
               
             HttpSession session=request.getSession();  
             session.invalidate();  
-              
+            
             out.print("<script>alert('Você foi desconectado!');</script>");  
-            out.print("<script>location.replace('index.jsp');</script>");  
+            response.sendRedirect("index.jsp");
             out.close(); 
             
             

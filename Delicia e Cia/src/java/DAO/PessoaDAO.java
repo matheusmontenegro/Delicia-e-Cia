@@ -8,11 +8,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class PessoaDAO {
+public class PessoaDAO implements PessoaDAOint{
     private Connection connection;
     public PessoaDAO() throws ClassNotFoundException, SQLException{
         this.connection = Conexao.getConnection();
     }
+    @Override
     public boolean login(String login, String password) throws SQLException{
         String sql = "select * from pessoa where login = ? and senha = ?";
         int row = 0;
@@ -25,12 +26,14 @@ public class PessoaDAO {
         rs.last();
         row = rs.getRow();
         stmt.close();
+        System.out.println(row);
         if(row == 0) {
             return false;
         }else{
             return true;
         }
     }
+    @Override
     public String getUserName(String login) throws SQLException{
         String sql = "select nome from pessoa where login = ?";
         PreparedStatement stmt = connection.prepareStatement(sql);
@@ -42,10 +45,11 @@ public class PessoaDAO {
         stmt.close();
         return nome;
     }
+    @Override
     public boolean cpfCheck(String cpf) throws SQLException{
         String sqlCPF = "select * from pessoa where cpf = ?";
         int rowCpf = 0;
-
+        
         PreparedStatement stmtCpf = connection.prepareStatement(sqlCPF, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY); 
         stmtCpf.setString(1, cpf);
         stmtCpf.execute();
@@ -59,6 +63,7 @@ public class PessoaDAO {
                 return false;
             }
     }
+    @Override
     public boolean rgCheck(String rg) throws SQLException{
         String sqlRG = "select * from pessoa where rg = ?";
         int rowRg = 0;
@@ -76,6 +81,7 @@ public class PessoaDAO {
                 return false;
             }
     }
+    @Override
     public boolean isAdmin(String login) throws SQLException{
         String sql = "select admin from pessoa where login = ?";
         
@@ -91,6 +97,7 @@ public class PessoaDAO {
             return false;
         }
     }
+    @Override
     public boolean loginCheck(String login) throws SQLException{
         String sqlLogin = "select * from pessoa where login = ?";
         int rowLogin = 0;
@@ -109,6 +116,7 @@ public class PessoaDAO {
             }
     }
 
+    @Override
     public String cadastrar(Pessoa pessoa) throws SQLException{
         String retorno = null;
         if(rgCheck(pessoa.getRg())){
@@ -143,4 +151,23 @@ public class PessoaDAO {
         }
         return retorno;
     }  
+    @Override
+    public Pessoa getPessoa(String login) throws SQLException{
+        String sql = "select * from pessoa where login = ?";
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        stmt.setString(1, login);
+        stmt.execute();
+        ResultSet rs = stmt.getResultSet();
+        rs.next();
+        Pessoa pessoa = new Pessoa();
+        pessoa.setNome(rs.getString(2));
+        pessoa.setCpf(rs.getString(3));
+        pessoa.setLogin(rs.getString(4));
+        pessoa.setEndereco(rs.getString(6));
+        pessoa.setTelefone(rs.getString(7));
+        pessoa.setFoto_perfil(rs.getString(8));
+        pessoa.setRg(rs.getString(9));
+        stmt.close();
+        return pessoa;
+    }
 }

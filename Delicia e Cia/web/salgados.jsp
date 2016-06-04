@@ -1,3 +1,9 @@
+
+<%@page import="Bean.Produto"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@page import="DAO.ProdutoDAO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,7 +41,7 @@
 </ul>
 <nav class="grey darken-2 z-depth-3">
   <div class="nav-wrapper container grey darken-2">
-    <a href="#!" class="brand-logo"><img src="img/logo.png" style="width:70px;"></a>
+    <a href="index.jsp" class="brand-logo"><img src="img/logo.png" style="width:70px;"></a>
 <!-- Botão do Menu Mobile -->
     <a href="#" data-activates="mobile-demo" class="button-collapse"><img src="img/menuButton.png" style="width:30px; margin-top: 15px;"></a>
 <!-- Opções da Navbar -->
@@ -61,7 +67,7 @@
     <div class="modal-content">
       <h4>Login</h4>
       <div class="row">
-    <form class="col s12" method="post" action="~~~~EDITHERE~~~~">
+    <form class="col s12" method="post" action="ServletLogin">
       <div class="row">
 	      <div class="input-field col s12">
 	      		<input id="user" name="user" type="text">
@@ -90,7 +96,7 @@
     <div class="modal-content">
       <h4>Cadastro</h4>
       <div class="row">
-    <form class="col s12" method="post" action="~~~~EDITHERE~~~~">
+    <form class="col s12" method="post" action="ServletCadastro">
       <div class="row">
         <div class="input-field col s12">
           <input placeholder="Ex: José da Silva Santos" id="name" type="text" class="validate">
@@ -157,66 +163,42 @@
  </div>
 </div>
 
-
 <!-- Row dos Salgados -->
 <div class="container">
     <div class="section">
  <!-- Linha -->
       <div class="row">
-        <h4>Salgados...</h4>
-        <div class="col s12 m4 hoverable">
-          <div class="icon-block">
-          <h2 class="center light-blue-text">
-        <img class="circle" src="http://www.mistersabor.com/wp-content/uploads/2013/04/UNIDADE-Coxinha-de-Frango1.jpg" style="width:150px;" ">
-        </h2>
-            <h5 class="center">Coxinha!</h5>
-            <p class="light center">O salgado mais comido no mundo! E o que menos engorda por não ter fritura...</p>
-            <h4><p class="orange-text center">R$ 2,00/Cada.</p></h4>
-            <div class="center">
-              <button class="btn waves-effect waves-light white-text yellow darken-2">
-                Comprar
-              </button>
+      	<h4>Salgados...</h4>
+        <%  
+            ProdutoDAO produtoDao = new ProdutoDAO();
+            ArrayList<Produto> produtos = produtoDao.listarTodos("salgado"); 
+            pageContext.setAttribute("produtos", produtos);
+        %>
+        <c:forEach var="produto" items="${produtos}">
+        <form method="post" action="ServletPedido">
+            <input type="text" name="id" style="display:none;" value="<c:out value='${produto.getIdProduto()}'/>"/>
+            <div class="col s12 m4 hoverable">
+              <div class="icon-block">
+                              <h2 class="center light-blue-text">
+                                  <img class="circle" src="produtoImg/<c:out value='${produto.getFoto()}'/>" style="width:150px; height:150px;">
+                              </h2>
+                      <h5 class="center"><c:out value='${produto.getNomeProduto()}'/></h5>
+                      <p class="light center" style="height:43.64px;"><c:out value='${produto.getDescricao()}'/></p>
+                      <h4><p class="orange-text center">R$ <c:out value='${produto.getPrecoUnidade()}'/></p></h4>
+                      <div class="center">
+                              <button type="submit" class="btn waves-effect waves-light white-text yellow darken-2">
+                                    Comprar
+                              </button>
+                      </div>
+                      <br>
+              </div>
             </div>
-            <br>
-          </div>
-        </div>
+        </form>
+        </c:forEach>
 
-        <div class="col s12 m4 hoverable">
-          <div class="icon-block">
-          <h2 class="center light-blue-text">
-        <img class="circle" src="http://www.massafinaalimentos.com.br/admin/produtos/fotos/20100112033741folhado.jpg" style="width:150px;">
-        </h2>
-            <h5 class="center">Folheado Top!</h5>
-            <p class="light center">Saboroso e light! Cuida e pida o seu! </p>
-            <h4><p class="orange-text center">R$ 2,00/Cada</p></h4>
-            <div class="center">
-              <button class="btn waves-effect waves-light white-text yellow darken-2">
-                Comprar
-              </button>
-            </div>
-            <br>
-          </div>
-        </div>
-
-        <div class="col s12 m4 hoverable">
-          <div class="icon-block">
-          <h2 class="center light-blue-text">
-        <img class="circle" src="http://i.huffpost.com/gen/1278175/thumbs/o-CROISSANT-facebook.jpg" style="width:150px;">
-        </h2>
-            <h5 class="center">Croissant Big!</h5>
-            <p class="light center">Croissant sem igual! Recomendo! Peça agora mesmo! </p>
-            <h4><p class="orange-text center">R$ 2,00/Cada</p></h4>
-            <div class="center">
-              <button class="btn waves-effect waves-light white-text yellow darken-2">
-                Comprar
-              </button>
-            </div>
-            <br>
-          </div>
-        </div>
       </div>
  <!-- Fim da Linha -->
     </div>
- </div> 
+ </div>
 </body>
 </html>

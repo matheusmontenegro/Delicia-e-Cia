@@ -36,6 +36,7 @@ public class ServletLogin extends HttpServlet {
                     session.setAttribute("admin",nome); 
                     //session.setMaxInactiveInterval(120);
                 }else{
+                    session.setAttribute("login",login); 
                     session.setAttribute("nome",nome); 
                     session.setAttribute("admin",null); 
                     //session.setMaxInactiveInterval(120);

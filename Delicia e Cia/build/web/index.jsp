@@ -1,3 +1,6 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="Bean.Produto"%>
+<%@page import="DAO.ProdutoDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -61,9 +64,10 @@
       <li class="waves-effect waves-yellow"><a href="index.jsp">Home</a></li>
       <li class="waves-effect waves-yellow"><a href="#">Contato</a></li>
       <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Produtos</a></li>
+      <li class="waves-effect waves-yellow"><a href="pedido.jsp">Carrinho</a></li>
       <li id="loginButton"><a href="#loginModal" class="waves-effect waves-yellow btn modal-trigger white black-text">Login</a></li>
       <li id="cadastroButton"><a href="#cadastroModal" class="waves-effect waves-light btn-large modal-trigger yellow darken-1 ">Cadastre-se</a></li>
-      <li id="minhaContaButton" style="display:none;"><a href="#" class="waves-effect waves-light btn-large yellow darken-1">Minha Página</a></li>
+      <li id="minhaContaButton" style="display:none;"><a href="userHome.jsp" class="waves-effect waves-light btn-large yellow darken-1">Minha Página</a></li>
       <li id="logoutButton" style="display:none;"><a href="ServletLogout" class="white-text">Logout</a></li>
     </ul>
 <!-- Opções do Menu Mobile -->
@@ -71,6 +75,7 @@
       <li><a href="index.jsp">Home</a></li>
       <li><a href="#">Contato</a></li>
       <li><a href="#!" class="dropdown-button" data-activates="dropdown2">Produtos</a></li>
+      <li><a href="pedido.jsp">Carrinho</a></li>
       <li id="loginButton"><a href="#loginModal" class="waves-effect waves-yellow btn modal-trigger white black-text">Login</a></li>
       <li id="cadastroButton"><a href="#cadastroModal" class="waves-effect waves-light btn-large modal-trigger yellow darken-1 ">Cadastre-se</a></li>
       <li id="minhaContaButtonMobile" style="display:none;"><a href="#" class="waves-effect waves-light btn-large yellow darken-1">Minha Página</a></li>
@@ -189,59 +194,43 @@
 <div class="container">
     <div class="section">
  <!-- Linha -->
+
       <div class="row">
       	<h4>Doces...</h4>
-        <div class="col s12 m4 hoverable">
-          <div class="icon-block">
-	  		  <h2 class="center light-blue-text">
-	 			<img class="circle" src="http://www.saudedica.com.br/wp-content/uploads/2014/03/batata-doce.jpg" style="width:150px; height:167px;" ">
-	 		  </h2>
-	          <h5 class="center">Batata Doce!</h5>
-	          <p class="light center">Não deixa de ser doce. O mais saudável possível. É natural!</p>
-	          <h4><p class="orange-text center">R$ 2,00/Kg.</p></h4>
-	          <div class="center">
-		          <button class="btn waves-effect waves-light white-text yellow darken-2">
-		          	Comprar
-		          </button>
-	          </div>
-	          <br>
-          </div>
-        </div>
-
-        <div class="col s12 m4 hoverable">
-          <div class="icon-block">
-	  		  <h2 class="center light-blue-text">
-	 			<img class="circle" src="http://www.bolsademulher.com/sites/www.bolsademulher.com/files/receita/melhores-receitas-de-doce-5.jpg" style="width:150px;">
-	 		  </h2>
-	          <h5 class="center">Cupcake Top!</h5>
-	          <p class="light center">Delicioso Cupcake com Chantilly Azul. Engorda pouquinho. </p>
-	          <h4><p class="orange-text center">R$ 2,00/Cada</p></h4>
-	          <div class="center">
-		          <button class="btn waves-effect waves-light white-text yellow darken-2">
-		          	Comprar
-		          </button>
-	          </div>
-	          <br>
-          </div>
-        </div>
-
-        <div class="col s12 m4 hoverable">
-          <div class="icon-block">
-	  		  <h2 class="center light-blue-text">
-	 			<img class="circle" src="http://www.bolsademulher.com/sites/www.bolsademulher.com/files/receita/melhores-receitas-de-doce-5.jpg" style="width:150px;">
-	 		  </h2>
-	          <h5 class="center">Cupcake Top!</h5>
-	          <p class="light center">Delicioso Cupcake com Chantilly Azul. Engorda pouquinho. </p>
-	          <h4><p class="orange-text center">R$ 2,00/Cada</p></h4>
-	          <div class="center">
-		          <button class="btn waves-effect waves-light white-text yellow darken-2">
-		          	Comprar
-		          </button>
-	          </div>
-	          <br>
-          </div>
-        </div>
-
+           <% 
+                ProdutoDAO produtoDao = new ProdutoDAO();
+                ArrayList<Produto> produtos = produtoDao.listarTodos("doce"); 
+                int i=0;
+                for (Produto product : produtos ) {
+                    i++;
+                        
+            %>
+            <form method="post" action="ServletPedido">
+              <input type="text" name="id" style="display:none;" value="<c:out value='${produto.getIdProduto()}'/>"/>
+              <div class="col s12 m4 hoverable">
+                <div class="icon-block">
+                                <h2 class="center light-blue-text">
+                                    <img class="circle" src="produtoImg/<%=product.getFoto()%>" style="width:150px; height:150px;">
+                                </h2>
+                        <h5 class="center"><%=product.getNomeProduto()%></h5>
+                        <p class="light center" style="height:43.64px;"><%=product.getDescricao()%></p>
+                        <h4><p class="orange-text center">R$ <%=product.getPrecoUnidade()%></p></h4>
+                        <div class="center">
+                                <button type="submit" class="btn waves-effect waves-light white-text yellow darken-2">
+                                      Comprar
+                                </button>
+                        </div>
+                        <br>
+                </div>
+              </div>
+            </form>
+            <%
+                if(i==3){
+                    break;
+                }
+              }
+              
+            %>
       </div>
  <!-- Fim da Linha -->
       <a class="yellow-text right-align" href="doces.jsp"><h5 class="light">Clique para ver mais...</h5></a>
@@ -260,58 +249,41 @@
     <div class="section">
  <!-- Linha -->
       <div class="row">
-      	<h4>Salgados...</h4>
-        <div class="col s12 m4 hoverable">
-          <div class="icon-block">
-	  		  <h2 class="center light-blue-text">
-	 			<img class="circle" src="http://www.mistersabor.com/wp-content/uploads/2013/04/UNIDADE-Coxinha-de-Frango1.jpg" style="width:150px;" ">
-	 		  </h2>
-	          <h5 class="center">Coxinha!</h5>
-	          <p class="light center">O salgado mais comido no mundo! E o que menos engorda por não ter fritura...</p>
-	          <h4><p class="orange-text center">R$ 2,00/Cada.</p></h4>
-	          <div class="center">
-		          <button class="btn waves-effect waves-light white-text yellow darken-2">
-		          	Comprar
-		          </button>
-	          </div>
-	          <br>
-          </div>
-        </div>
-
-        <div class="col s12 m4 hoverable">
-          <div class="icon-block">
-	  		  <h2 class="center light-blue-text">
-	 			<img class="circle" src="http://www.massafinaalimentos.com.br/admin/produtos/fotos/20100112033741folhado.jpg" style="width:150px;">
-	 		  </h2>
-	          <h5 class="center">Folheado Top!</h5>
-	          <p class="light center">Saboroso e light! Cuida e pida o seu! </p>
-	          <h4><p class="orange-text center">R$ 2,00/Cada</p></h4>
-	          <div class="center">
-		          <button class="btn waves-effect waves-light white-text yellow darken-2">
-		          	Comprar
-		          </button>
-	          </div>
-	          <br>
-          </div>
-        </div>
-
-        <div class="col s12 m4 hoverable">
-          <div class="icon-block">
-	  		  <h2 class="center light-blue-text">
-	 			<img class="circle" src="http://i.huffpost.com/gen/1278175/thumbs/o-CROISSANT-facebook.jpg" style="width:150px;">
-	 		  </h2>
-	          <h5 class="center">Croissant Big!</h5>
-	          <p class="light center">Croissant sem igual! Recomendo! Peça agora mesmo! </p>
-	          <h4><p class="orange-text center">R$ 2,00/Cada</p></h4>
-	          <div class="center">
-		          <button class="btn waves-effect waves-light white-text yellow darken-2">
-		          	Comprar
-		          </button>
-	          </div>
-	          <br>
-          </div>
-        </div>
-
+        <h4>Salgados...</h4>
+           <% 
+                ProdutoDAO produtoDao2 = new ProdutoDAO();
+                ArrayList<Produto> produtos2 = produtoDao2.listarTodos("salgado"); 
+                int i2=0;
+                for (Produto product : produtos2 ) {
+                    i2++;
+                        
+            %>
+            <form method="post" action="ServletPedido">
+              <input type="text" name="id" style="display:none;" value="<c:out value='${produto.getIdProduto()}'/>"/>
+              <div class="col s12 m4 hoverable">
+                <div class="icon-block">
+                                <h2 class="center light-blue-text">
+                                    <img class="circle" src="produtoImg/<%=product.getFoto()%>" style="width:150px; height:150px;">
+                                </h2>
+                        <h5 class="center"><%=product.getNomeProduto()%></h5>
+                        <p class="light center" style="height:43.64px;"><%=product.getDescricao()%></p>
+                        <h4><p class="orange-text center">R$ <%=product.getPrecoUnidade()%></p></h4>
+                        <div class="center">
+                                <button type="submit" class="btn waves-effect waves-light white-text yellow darken-2">
+                                      Comprar
+                                </button>
+                        </div>
+                        <br>
+                </div>
+              </div>
+            </form>
+            <%
+                if(i2==3){
+                    break;
+                }
+              }
+              
+            %>
       </div>
  <!-- Fim da Linha -->
       <a class="yellow-text right-align" href="salgados.jsp"><h5 class="light">Clique para ver mais...</h5></a>

@@ -30,35 +30,52 @@
 	</style>
 </head>
 <body>
-
+    <%
+        if(session.getAttribute("nome") != null){
+            out.println("<script> "
+                    + "$(document).ready(function(){ "
+                    +    "$('#loginButton, #cadastroButton').css('display', 'none'); "
+                    +    "$('#minhaContaButton, #logoutButton').css('display', 'inline-block'); "
+                    +    "$('#minhaContaButtonMobile, #logoutButtonMobile').css('display', 'block'); "
+                    + "});"
+                    + "</script>");           
+        }
+        if (session.getAttribute("admin") != null) {
+            out.println("<script>alert('Desculpe, você está logado como administrador. Para poder efetuar compras logue novamente com um usuário normal.')</script>");
+        }
+    %>
 <ul id="dropdown1" class="dropdown-content">
   <li><a href="doces.jsp">Doces</a></li>
   <li><a href="salgados.jsp">Salgados</a></li>
 </ul>
 <ul id="dropdown2" class="dropdown-content">
-  <li><a href="doces.jsp">Doces</a></li>
-  <li><a href="salgados.jsp">Salgados</a></li>
+  <li><a href="#!">Doces</a></li>
+  <li><a href="#!">Salgados</a></li>
 </ul>
 <nav class="grey darken-2 z-depth-3">
   <div class="nav-wrapper container grey darken-2">
     <a href="#!" class="brand-logo"><img src="img/logo.png" style="width:70px;"></a>
 <!-- Botão do Menu Mobile -->
-    <a href="#" data-activates="mobile-demo" class="button-collapse"><img src="img/menuButton.png" style="width:30px; margin-top: 15px;"></a>
+    <a href="#" data-activates="mobile" class="button-collapse"><img src="img/menuButton.png" style="width:30px; margin-top: 15px;"></a>
 <!-- Opções da Navbar -->
     <ul class="right hide-on-med-and-down">
       <li class="waves-effect waves-yellow"><a href="index.jsp">Home</a></li>
       <li class="waves-effect waves-yellow"><a href="#">Contato</a></li>
       <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Produtos</a></li>
-      <li><a href="#loginModal" class="waves-effect waves-yellow btn modal-trigger white black-text">Login</a></li>
-      <li><a href="#cadastroModal" class="waves-effect waves-light btn-large modal-trigger yellow darken-1 ">Cadastre-se</a></li>
+      <li id="loginButton"><a href="#loginModal" class="waves-effect waves-yellow btn modal-trigger white black-text">Login</a></li>
+      <li id="cadastroButton"><a href="#cadastroModal" class="waves-effect waves-light btn-large modal-trigger yellow darken-1 ">Cadastre-se</a></li>
+      <li id="minhaContaButton" style="display:none;"><a href="#" class="waves-effect waves-light btn-large yellow darken-1">Minha Página</a></li>
+      <li id="logoutButton" style="display:none;"><a href="ServletLogout" class="white-text">Logout</a></li>
     </ul>
 <!-- Opções do Menu Mobile -->
-    <ul class="side-nav" id="mobile-demo">
+    <ul class="side-nav" id="mobile">
       <li><a href="index.jsp">Home</a></li>
       <li><a href="#">Contato</a></li>
       <li><a href="#!" class="dropdown-button" data-activates="dropdown2">Produtos</a></li>
-      <li><a href="#loginModal" class="waves-effect waves-yellow btn modal-trigger white black-text">Login</a></li>
-      <li><a href="#cadastroModal" class="waves-effect waves-light btn-large modal-trigger yellow darken-1 ">Cadastre-se</a></li>
+      <li id="loginButton"><a href="#loginModal" class="waves-effect waves-yellow btn modal-trigger white black-text">Login</a></li>
+      <li id="cadastroButton"><a href="#cadastroModal" class="waves-effect waves-light btn-large modal-trigger yellow darken-1 ">Cadastre-se</a></li>
+      <li id="minhaContaButtonMobile" style="display:none;"><a href="#" class="waves-effect waves-light btn-large yellow darken-1">Minha Página</a></li>
+      <li id="logoutButtonMobile" style="display:none;"><a href="ServletLogout">Logout</a></li>
     </ul>
   </div>
 </nav>
@@ -175,22 +192,25 @@
             pageContext.setAttribute("produtos", produtos);
         %>
         <c:forEach var="produto" items="${produtos}">
+            <form method="post" action="ServletPedido">
+            <input type="text" name="id" style="display:none;" value="<c:out value='${produto.getIdProduto()}'/>"/>
             <div class="col s12 m4 hoverable">
               <div class="icon-block">
                               <h2 class="center light-blue-text">
                                   <img class="circle" src="produtoImg/<c:out value='${produto.getFoto()}'/>" style="width:150px; height:150px;">
                               </h2>
                       <h5 class="center"><c:out value='${produto.getNomeProduto()}'/></h5>
-                      <p class="light center"><c:out value='${produto.getDescricao()}'/></p>
+                      <p class="light center" style="height:43.64px;"><c:out value='${produto.getDescricao()}'/></p>
                       <h4><p class="orange-text center">R$ <c:out value='${produto.getPrecoUnidade()}'/></p></h4>
                       <div class="center">
-                              <button class="btn waves-effect waves-light white-text yellow darken-2">
+                              <button type="submit" class="btn waves-effect waves-light white-text yellow darken-2">
                                     Comprar
                               </button>
                       </div>
                       <br>
               </div>
             </div>
+            </form>
         </c:forEach>
 
       </div>
