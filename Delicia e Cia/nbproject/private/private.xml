@@ -3,9 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Ruthe%20Cavacalnte/Documents/NetBeansProjects/Delicia-e-Cia/Delicia%20e%20Cia/web/cadastro.jsp</file>
-            <file>file:/C:/Users/Ruthe%20Cavacalnte/Documents/NetBeansProjects/Delicia-e-Cia/Delicia%20e%20Cia/web/index.jsp</file>
-            <file>file:/C:/Users/Ruthe%20Cavacalnte/Documents/NetBeansProjects/Delicia-e-Cia/Delicia%20e%20Cia/src/java/DAO/ProdutoDAO.java</file>
+            <file>file:/C:/Users/Ruthe%20Cavacalnte/Documents/NetBeansProjects/Delicia-e-Cia/Delicia%20e%20Cia/src/java/Servlets/ServletComprar.java</file>
+            <file>file:/C:/Users/Ruthe%20Cavacalnte/Documents/NetBeansProjects/Delicia-e-Cia/Delicia%20e%20Cia/src/java/Bean/Pedido.java</file>
+            <file>file:/C:/Users/Ruthe%20Cavacalnte/Documents/NetBeansProjects/Delicia-e-Cia/Delicia%20e%20Cia/src/java/Bean/ProdutoPedido.java</file>
+            <file>file:/C:/Users/Ruthe%20Cavacalnte/Documents/NetBeansProjects/Delicia-e-Cia/Delicia%20e%20Cia/src/java/Servlets/ServletLogin.java</file>
+            <file>file:/C:/Users/Ruthe%20Cavacalnte/Documents/NetBeansProjects/Delicia-e-Cia/Delicia%20e%20Cia/src/java/DAO/PedidoDAO.java</file>
         </group>
     </open-files>
 </project-private>

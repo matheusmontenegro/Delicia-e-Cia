@@ -206,7 +206,7 @@
                         
             %>
             <form method="post" action="ServletPedido">
-              <input type="text" name="id" style="display:none;" value="<c:out value='${produto.getIdProduto()}'/>"/>
+              <input type="text" name="id" style="display:none;" value="<%= product.getIdProduto()%>"/>
               <div class="col s12 m4 hoverable">
                 <div class="icon-block">
                                 <h2 class="center light-blue-text">
@@ -259,7 +259,7 @@
                         
             %>
             <form method="post" action="ServletPedido">
-              <input type="text" name="id" style="display:none;" value="<c:out value='${produto.getIdProduto()}'/>"/>
+              <input type="text" name="id" style="display:none;" value="<%= product.getIdProduto()%>"/>
               <div class="col s12 m4 hoverable">
                 <div class="icon-block">
                                 <h2 class="center light-blue-text">

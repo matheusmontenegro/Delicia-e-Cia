@@ -1,13 +1,57 @@
 
 package Bean;
 
+import java.sql.Timestamp;
+
 
 public class Pedido {
     private int idPedido;
-    private int qtdDoces;
-    private int qtdSalgados;
-    private int valorTotal;
+    private Timestamp data_hora;
+    private double valorTotal;
+    public ProdutoPedido produtoPedido;
     private int pessoaId;
+
+    /**
+     * @return the valorTotal
+     */
+    public double getValorTotal() {
+        return valorTotal;
+    }
+
+    /**
+     * @param valorTotal the valorTotal to set
+     */
+    public void setValorTotal(double valorTotal) {
+        this.valorTotal = valorTotal;
+    }
+
+    /**
+     * @return the pessoaId
+     */
+    public int getPessoaId() {
+        return pessoaId;
+    }
+
+    /**
+     * @param pessoaId the pessoaId to set
+     */
+    public void setPessoaId(int pessoaId) {
+        this.pessoaId = pessoaId;
+    }
+
+    /**
+     * @return the produtoPedido
+     */
+    public ProdutoPedido getProdutoPedido() {
+        return produtoPedido;
+    }
+
+    /**
+     * @param produtoPedido the produtoPedido to set
+     */
+    public void setProdutoPedido(ProdutoPedido produtoPedido) {
+        this.produtoPedido = produtoPedido;
+    }
 
     /**
      * @return the idPedido
@@ -24,58 +68,16 @@ public class Pedido {
     }
 
     /**
-     * @return the qtdDoces
+     * @return the data_hora
      */
-    public int getQtdDoces() {
-        return qtdDoces;
+    public Timestamp getData_hora() {
+        return data_hora;
     }
 
     /**
-     * @param qtdDoces the qtdDoces to set
+     * @param data_hora the data_hora to set
      */
-    public void setQtdDoces(int qtdDoces) {
-        this.qtdDoces = qtdDoces;
-    }
-
-    /**
-     * @return the qtdSalgados
-     */
-    public int getQtdSalgados() {
-        return qtdSalgados;
-    }
-
-    /**
-     * @param qtdSalgados the qtdSalgados to set
-     */
-    public void setQtdSalgados(int qtdSalgados) {
-        this.qtdSalgados = qtdSalgados;
-    }
-
-    /**
-     * @return the valorTotal
-     */
-    public int getValorTotal() {
-        return valorTotal;
-    }
-
-    /**
-     * @param valorTotal the valorTotal to set
-     */
-    public void setValorTotal(int valorTotal) {
-        this.valorTotal = valorTotal;
-    }
-
-    /**
-     * @return the pessoaId
-     */
-    public int getPessoaId() {
-        return pessoaId;
-    }
-
-    /**
-     * @param pessoaId the pessoaId to set
-     */
-    public void setPessoaId(int pessoaId) {
-        this.pessoaId = pessoaId;
+    public void setData_hora(Timestamp data_hora) {
+        this.data_hora = data_hora;
     }
 }

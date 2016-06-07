@@ -26,7 +26,6 @@ public class PessoaDAO implements PessoaDAOint{
         rs.last();
         row = rs.getRow();
         stmt.close();
-        System.out.println(row);
         if(row == 0) {
             return false;
         }else{
@@ -169,5 +168,17 @@ public class PessoaDAO implements PessoaDAOint{
         pessoa.setRg(rs.getString(9));
         stmt.close();
         return pessoa;
+    }
+    @Override
+    public int getId(String login) throws SQLException{
+        String sql = "select id from pessoa where login = ?";
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        stmt.setString(1, login);
+        stmt.execute();
+        ResultSet rs = stmt.getResultSet();
+        rs.next();
+        int id = rs.getInt("id");
+        stmt.close();
+        return id;
     }
 }
