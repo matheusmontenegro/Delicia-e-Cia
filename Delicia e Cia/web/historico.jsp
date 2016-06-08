@@ -84,7 +84,7 @@
     <div class="row">
         <div class="card hoverable col s12">
             <div class="card-content">
-            <span class="card-title">Histórico de Compra</span>
+            <span class="card-title">Histórico de Compras</span>
               <%
                   PessoaDAO pessoa = new PessoaDAO();
                   String login = (String)session.getAttribute("login");
@@ -107,7 +107,7 @@
                     <td><c:out value='${pedido.value.getData_hora()}'/></td>
                     <td>R$ <c:out value='${pedido.value.getValorTotal()}'/></td>
                     <td>
-                        <form >
+                        <form method="post" action="ServletDetalhesCompra">
                             <input style="display:none;" type="number" name="idPedido" value="<c:out value='${pedido.key}'/>"/>
                             <button type="submit" class="waves-effect waves-light btn yellow darken-2">Detalhes</button>
                         </form>

@@ -1,9 +1,8 @@
-<%@page import="Bean.Pedido"%>
+<%@page import="Bean.CompraDetalhes"%>
+<%@page import="DAO.PedidoDAO"%>
 <%@page import="Bean.Pessoa"%>
 <%@page import="DAO.PessoaDAO"%>
 <%@page import="java.util.LinkedHashMap"%>
-<%@page import="Bean.Produto"%>
-<%@page import="java.util.ArrayList"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -15,19 +14,7 @@
 <script>
   $(document).ready(function(){
     $(".button-collapse").sideNav();
-    $('select').material_select();
   });
-</script>
-<script type="text/javascript">
-  function qtdReplace(id, qtd){
-    if(qtd<1){
-      alert('Insira uma quantidade válida');
-      document.getElementById("id"+id).value = 1;  
-      document.getElementById(id).value = 1;  
-    }else{
-      document.getElementById(id).value = qtd;
-    }
-  }
 </script>
   <title>D&C Pedido</title>
 </head>
@@ -83,56 +70,47 @@
     <div class="row">
         <div class="card hoverable col s12">
             <div class="card-content">
-            <span class="card-title">Finalizar Compra</span>
+            <span class="card-title">Detalhes da Compra</span>
               <%
-                  LinkedHashMap<Integer, Pedido> compra = (LinkedHashMap<Integer, Pedido>) session.getAttribute("compra");
+                  LinkedHashMap<Integer, CompraDetalhes> compra = (LinkedHashMap<Integer, CompraDetalhes>) session.getAttribute("detalhes");
+                  CompraDetalhes detalhes = new CompraDetalhes();
+                  detalhes = compra.get(1);
+                  pageContext.setAttribute("dataHora", detalhes.getDataHora());
+                  pageContext.setAttribute("total", detalhes.getValorTotal());
                   pageContext.setAttribute("compra", compra);
               %>           
               <div class="row">
                 <table class="striped highlight">
                   <thead>
                     <tr>
-                        <th>Produto</th>
-                        <th>Preço da Unidade</th>
-                        <th>Preço do Cento</th>
                         <th>Quantidade</th>
-                        <th>Valor do Produto</th>                        
+                        <th>Nome do Produto</th>
+                        <th>Valor</th>
                     </tr>
                   </thead>
                   <tbody>
-              <c:forEach var="pedido" items="${compra}">
-                  <tr>
-                    <td><c:out value='${pedido.value.produtoPedido.produto.getNomeProduto()}'/></td>
-                    <td>R$ <c:out value='${pedido.value.produtoPedido.produto.getPrecoUnidade()}'/></td>
-                    <td>R$ <c:out value='${pedido.value.produtoPedido.produto.getPrecoCento()}'/></td>
-                    <td><c:out value='${pedido.value.produtoPedido.getQuantidade()}'/></td> 
-                    <td>R$ <c:out value='${pedido.value.produtoPedido.getPrecoTotal()}'/></td>
-                  </tr>
-              </c:forEach>
-                  <td colspan="4" style="text-align:right;"><b>Total</b></td>
-                  <td><b>R$ ${total}</b></td>
+                    <c:forEach var="compra" items="${compra}">
+                        <tr>
+                          <td><c:out value='${compra.value.getQuantidade()}'/></td>
+                          <td><c:out value='${compra.value.getNomeProduto()}'/></td>
+                          <td>R$ <c:out value='${compra.value.getValorTotalProduto()}'/></td>
+                        </tr>
+                    </c:forEach>
+                        <tr>
+                            <td colspan="2" style="text-align:right;"><b>Total da Compra</b></td>
+                            <td><b>R$ <c:out value='${total}'/></b></td>
+                        </tr>
                   </tbody>
-                </table>                 
+                </table>     
+                <p>Data/Hora: ${dataHora}</p>
               </div>
-
-
               <div class="card-action">
-                <form method="post" action="ServletComprar">
-                  <input type="numeric" style="display:none;" name="totalCompra" value="${total}" />
-                  <button class="waves-effect waves-light btn-large yellow darken-2" type="submit">Concluir Compra</button>
-                  <button class="waves-effect waves-red btn-large white black-text" onClick="history.go(-1);">Voltar</button>
-                </form>
+                  <button class="waves-effect waves-red btn-large white black-text" onClick="location.replace('historico.jsp')">Voltar</button>
               </div>
-
-
-
-            </div>
-          
+            </div>          
        </div>
     </div>
   </div>
-</div>
-
-  
+</div> 
 </body>
 </html>

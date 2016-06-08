@@ -1,6 +1,7 @@
 
 package DAO;
 
+import Bean.CompraDetalhes;
 import Bean.Pedido;
 import Conexao.Conexao;
 import java.sql.Connection;
@@ -16,6 +17,7 @@ public class PedidoDAO implements PedidoDAOint {
         this.connection = Conexao.getConnection();
     }
     
+    @Override
     public int insertPedido(Double valorTotal, int idPessoa) throws SQLException{
         //Insert Into Pedido Table
         String sql = "Insert into pedido (valor, id_pessoa) Values (?,?);";
@@ -30,6 +32,7 @@ public class PedidoDAO implements PedidoDAOint {
         }
         return id;
     }
+    @Override
     public void insertProdutoPedido(int idPedido, int idProduto, int qtd, double valorProduto) throws SQLException{
         String sql = "INSERT INTO produto_pedido "
                 + "(produto_id, pedido_id, quantidade, preco_total) "
@@ -42,6 +45,7 @@ public class PedidoDAO implements PedidoDAOint {
         stmt.execute();
         stmt.close();
     }
+    @Override
     public LinkedHashMap<Integer, Pedido> getHistorico(int idPessoa) throws SQLException{
         LinkedHashMap<Integer, Pedido> pedidos = new LinkedHashMap<>();
         
@@ -61,7 +65,27 @@ public class PedidoDAO implements PedidoDAOint {
         return pedidos;
         
     }
-    
-    
-    
+    @Override
+    public LinkedHashMap<Integer, CompraDetalhes> getCompraDetails(int idPedido) throws SQLException{
+        LinkedHashMap<Integer, CompraDetalhes> compra = new LinkedHashMap<>();
+        
+        String sql = "SELECT pedido.data_hora, pedido.valor, produto_pedido.quantidade, produto_pedido.preco_total, produto.nome_produto FROM pedido, produto, produto_pedido " 
+                        +"WHERE pedido.id = ? AND " 
+                        +"produto_pedido.pedido_id = pedido.id AND " 
+                        +"produto.id = produto_pedido.produto_id;";
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        stmt.setInt(1, idPedido);
+        stmt.execute();
+        ResultSet rs = stmt.getResultSet();        
+        while(rs.next()){
+            CompraDetalhes detalhes = new CompraDetalhes();
+            detalhes.setDataHora(rs.getTimestamp(1));
+            detalhes.setValorTotal(rs.getDouble(2));
+            detalhes.setQuantidade(rs.getInt(3));
+            detalhes.setValorTotalProduto(rs.getDouble(4));
+            detalhes.setNomeProduto(rs.getString(5));
+            compra.put(rs.getRow(), detalhes);
+        }
+        return compra;   
+    } 
 }
