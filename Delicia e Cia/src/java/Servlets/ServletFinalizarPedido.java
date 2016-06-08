@@ -5,6 +5,7 @@ import Bean.Pedido;
 import Bean.Produto;
 import Bean.ProdutoPedido;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import javax.servlet.RequestDispatcher;
@@ -23,6 +24,7 @@ public class ServletFinalizarPedido extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+            PrintWriter out = response.getWriter();
             HttpSession session = request.getSession();
           if(session.getAttribute("carrinho")!= null){
             LinkedHashMap<Integer, Produto> produtos = (LinkedHashMap<Integer, Produto>)session.getAttribute("carrinho");
@@ -43,6 +45,7 @@ public class ServletFinalizarPedido extends HttpServlet {
                         double qtd = quantidade / 100.0;
                         int centena = (int) qtd;
                         double temp = (qtd-centena)*100;
+                        temp = Math.round(temp);
                         int dezena = (int)temp;           
                         valorProduto = (centena * precoCento)+(dezena * preco);
                         
@@ -61,8 +64,10 @@ public class ServletFinalizarPedido extends HttpServlet {
                 RequestDispatcher rd = request.getRequestDispatcher("finalizarPedido.jsp");
                 rd.forward(request, response);        
         }else{
-            RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
-            rd.forward(request, response);  
+            out.println("<script>alert('Carrinho Vazio!');</script>");
+            out.println("<script>history.go(-1)</script>");
+            //RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+            //rd.forward(request, response);  
         }
     }
 }

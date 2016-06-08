@@ -48,7 +48,7 @@
     <ul class="right hide-on-med-and-down">
       <li class="waves-effect waves-yellow"><a href="index.jsp">Início</a></li>
       <li class="waves-effect waves-yellow"><a href="userHome.jsp">Minha Página</a></li>
-      <li class="waves-effect waves-yellow"><a href="historico.jsp">Hitórico de Pedidos</a></li>
+      <li class="waves-effect waves-yellow"><a href="historico.jsp">Histórico de Pedidos</a></li>
       <li class="waves-effect waves-yellow"><a href="pedido.jsp">Carrinho</a></li>
       <li class="waves-effect waves-yellow" id="logoutButton"><a href="ServletLogout" class="white-text">Sair</a></li>
       <li><div class="chip"><img src="perfilImg/${pessoa.getFoto_perfil()}" alt="Usuário da Sessão">${pessoa.getNome()}</li>

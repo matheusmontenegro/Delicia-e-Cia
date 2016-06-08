@@ -38,6 +38,7 @@
         }else{
             if (session.getAttribute("nome") != null) {
             }else{
+                out.println("<script>alert('Faça login para poder acessar o carrinho.')</script>");
                 out.println("<script>location.replace('index.jsp')</script>");
             }
         }

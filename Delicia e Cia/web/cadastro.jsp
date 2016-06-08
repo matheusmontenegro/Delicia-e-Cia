@@ -32,17 +32,20 @@
 <!-- Botão do Menu Mobile -->
     <a href="#" data-activates="mobile-demo" class="button-collapse"><img src="img/menuButton.png" style="width:30px; margin-top: 15px;"></a>
 <!-- Opções da Navbar -->
-    <ul class="right hide-on-med-and-down">
-      <li class="waves-effect waves-yellow"><a href="admin.jsp">Home</a></li>
+     <ul class="right hide-on-med-and-down">
+      <li class="waves-effect waves-yellow"><a href="index.jsp">Início</a></li>
+      <li class="waves-effect waves-yellow"><a href="admin.jsp">Minha Página</a></li>
       <li class="waves-effect waves-yellow"><a href="cadastro.jsp">Cadastrar Produto</a></li>
-      <li class="waves-effect waves-yellow"><a href="#!">Pesquisar Produto</a></li>
-      <li class="waves-effect waves-yellow" id="logoutButton"><a href="ServletLogout" class="white-text">Logout</a></li>
+      <li class="waves-effect waves-yellow"><a href="pesquisarProduto.jsp">Pesquisar Produto</a></li>
+      <li class="waves-effect waves-yellow" id="logoutButton"><a href="ServletLogout" class="white-text">Sair</a></li>
     </ul>
 <!-- Opções do Menu Mobile -->
     <ul class="side-nav" id="mobile-demo">
-      <li class="waves-effect waves-yellow"><a href="index.jsp">Home</a></li>
-      <li class="waves-effect waves-yellow"><a href="cadastro.jsp">Cadastro</a></li>
-      <li class="waves-effect waves-yellow" id="logoutButtonMobile"><a href="ServletLogout">Logout</a></li>
+      <li class="waves-effect waves-yellow"><a href="index.jsp">Início</a></li>
+      <li class="waves-effect waves-yellow"><a href="admin.jsp">Minha Página</a></li>
+      <li class="waves-effect waves-yellow"><a href="cadastro.jsp">Cadastrar Produto</a></li>
+      <li class="waves-effect waves-yellow"><a href="pesquisarProduto.jsp">Pesquisar Produto</a></li>
+      <li class="waves-effect waves-yellow" id="logoutButtonMobile"><a href="ServletLogout">Sair</a></li>
     </ul>
   </div>
 </nav>

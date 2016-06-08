@@ -110,7 +110,7 @@
 	      	<div class="input-field col s10">
 	      		<input class="btn-large waves-effect waves-light yellow darken-1" type="submit" value="Entrar">
 	      	</div>
-      	  <div class="input-field col s1"></div>
+      	  
       </div>
     </form>
   </div>

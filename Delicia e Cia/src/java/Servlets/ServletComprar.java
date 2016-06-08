@@ -28,6 +28,7 @@ public class ServletComprar extends HttpServlet {
             throws ServletException, IOException {
         PrintWriter out = response.getWriter();      
         HttpSession session = request.getSession();
+        if(session.getAttribute("compra")!= null){
         LinkedHashMap<Integer, Pedido> compra = (LinkedHashMap<Integer, Pedido>) session.getAttribute("compra");
         int idPessoa = 0;
         int idPedido = 0;
@@ -58,6 +59,10 @@ public class ServletComprar extends HttpServlet {
         session.setAttribute("carrinho", null);
         out.println("<script>alert('Compra realizada com sucesso! Obrigado!');</script>");
         out.println("<script>location.replace('index.jsp')</script>");
+    }else{
+       out.println("<script>alert('Você não escolheu nenhum produto!');</script>");
+       out.println("<script>location.replace('index.jsp')</script>");
+    }
     }
 
 }
