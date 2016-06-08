@@ -42,21 +42,21 @@
             }
         %>
     <ul class="right hide-on-med-and-down">
-      <li class="waves-effect waves-yellow"><a href="index.jsp">Home</a></li>
+      <li class="waves-effect waves-yellow"><a href="index.jsp">Início</a></li>
       <li class="waves-effect waves-yellow"><a href="userHome.jsp">Minha Página</a></li>
-      <li class="waves-effect waves-yellow"><a href="#">Hitórico de Pedidos</a></li>
+      <li class="waves-effect waves-yellow"><a href="historico.jsp">Histórico de Compras</a></li>
       <li class="waves-effect waves-yellow"><a href="pedido.jsp">Carrinho</a></li>
-      <li class="waves-effect waves-yellow" id="logoutButton"><a href="ServletLogout" class="white-text">Logout</a></li>
+      <li class="waves-effect waves-yellow" id="logoutButton"><a href="ServletLogout" class="white-text">Sair</a></li>
       <li><div class="chip"><img src="perfilImg/${pessoa.getFoto_perfil()}" alt="Usuário da Sessão">${pessoa.getNome()}</li>
     </ul>
 <!-- OpÃ§Ãµes do Menu Mobile -->
     <ul class="side-nav" id="mobile-demo">
     <li style="display:inline-block;"><div class="chip hoverable"><img src="perfilImg/${pessoa.getFoto_perfil()}" alt="Usuário da Sessão">${pessoa.getNome()}</li>
-      <li class="waves-effect waves-yellow"><a href="index.jsp">Home</a></li>
+      <li class="waves-effect waves-yellow"><a href="index.jsp">Início</a></li>
       <li class="waves-effect waves-yellow"><a href="userHome.jsp">Minha Página</a></li>
-      <li class="waves-effect waves-yellow"><a href="#">Histórico de Pedidos</a></li>
-      <li class="waves-effect waves-yellow"><a href="#">Carrinho</a></li>
-      <li class="waves-effect waves-yellow" id="logoutButtonMobile"><a href="ServletLogout">Logout</a></li>
+      <li class="waves-effect waves-yellow"><a href="historico.jsp">Histórico de Compras</a></li>
+      <li class="waves-effect waves-yellow"><a href="pedido.jsp">Carrinho</a></li>
+      <li class="waves-effect waves-yellow" id="logoutButtonMobile"><a href="ServletLogout">Sair</a></li>
     </ul>
   </div>
 </nav>

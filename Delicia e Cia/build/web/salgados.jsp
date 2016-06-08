@@ -30,7 +30,20 @@
 	</style>
 </head>
 <body>
-
+    <%
+        if(session.getAttribute("nome") != null){
+            out.println("<script> "
+                    + "$(document).ready(function(){ "
+                    +    "$('#loginButton, #cadastroButton').css('display', 'none'); "
+                    +    "$('#minhaContaButton, #logoutButton').css('display', 'inline-block'); "
+                    +    "$('#minhaContaButtonMobile, #logoutButtonMobile').css('display', 'block'); "
+                    + "});"
+                    + "</script>");           
+        }
+        if (session.getAttribute("admin") != null) {
+            out.println("<script>alert('Desculpe, você está logado como administrador. Para poder efetuar compras logue novamente com um usuário normal.')</script>");
+        }
+    %>
 <ul id="dropdown1" class="dropdown-content">
   <li><a href="doces.jsp">Doces</a></li>
   <li><a href="salgados.jsp">Salgados</a></li>
@@ -46,19 +59,23 @@
     <a href="#" data-activates="mobile-demo" class="button-collapse"><img src="img/menuButton.png" style="width:30px; margin-top: 15px;"></a>
 <!-- Opções da Navbar -->
     <ul class="right hide-on-med-and-down">
-      <li class="waves-effect waves-yellow"><a href="index.jsp">Home</a></li>
-      <li class="waves-effect waves-yellow"><a href="#">Contato</a></li>
+      <li class="waves-effect waves-yellow"><a href="index.jsp">Início</a></li>
       <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Produtos</a></li>
-      <li><a href="#loginModal" class="waves-effect waves-yellow btn modal-trigger white black-text">Login</a></li>
-      <li><a href="#cadastroModal" class="waves-effect waves-light btn-large modal-trigger yellow darken-1 ">Cadastre-se</a></li>
+      <li class="waves-effect waves-yellow"><a href="pedido.jsp">Carrinho</a></li>
+      <li id="loginButton"><a href="#loginModal" class="waves-effect waves-yellow btn modal-trigger white black-text">Login</a></li>
+      <li id="cadastroButton"><a href="#cadastroModal" class="waves-effect waves-light btn-large modal-trigger yellow darken-1 ">Cadastre-se</a></li>
+      <li id="minhaContaButton" style="display:none;"><a href="userHome.jsp" class="waves-effect waves-light btn-large yellow darken-1">Minha Página</a></li>
+      <li id="logoutButton" style="display:none;"><a href="ServletLogout" class="white-text">Sair</a></li>
     </ul>
 <!-- Opções do Menu Mobile -->
-    <ul class="side-nav" id="mobile-demo">
-      <li><a href="index.jsp">Home</a></li>
-      <li><a href="#">Contato</a></li>
+    <ul class="side-nav" id="mobile">
+      <li><a href="index.jsp">Início</a></li>
       <li><a href="#!" class="dropdown-button" data-activates="dropdown2">Produtos</a></li>
-      <li><a href="#loginModal" class="waves-effect waves-yellow btn modal-trigger white black-text">Login</a></li>
-      <li><a href="#cadastroModal" class="waves-effect waves-light btn-large modal-trigger yellow darken-1 ">Cadastre-se</a></li>
+      <li><a href="pedido.jsp">Carrinho</a></li>
+      <li id="loginButton"><a href="#loginModal" class="waves-effect waves-yellow btn modal-trigger white black-text">Login</a></li>
+      <li id="cadastroButton"><a href="#cadastroModal" class="waves-effect waves-light btn-large modal-trigger yellow darken-1 ">Cadastre-se</a></li>
+      <li id="minhaContaButtonMobile" style="display:none;"><a href="userHome.jsp" class="waves-effect waves-light btn-large yellow darken-1">Minha Página</a></li>
+      <li id="logoutButtonMobile" style="display:none;"><a href="ServletLogout">Sair</a></li>
     </ul>
   </div>
 </nav>
